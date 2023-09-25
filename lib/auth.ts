@@ -16,35 +16,12 @@ export const authOptions: NextAuthOptions = {
     maxAge: 30 * 24 * 60 * 60, // 30 days
   },
   pages: {
-    signIn: "/galogin",
+    signIn: "/login",
   },
   providers: [
     GoogleProvider({
-      clientId: process.env.NEXT_PUBLIC_GOOGLE_LOGIN_CLIENT_ID,
+      clientId: process.env.GOOGLE_LOGIN_CLIENT_ID,
       clientSecret: process.env.GOOGLE_LOGIN_CLIENT_SECRET,
-    }),
-
-    Credentials({
-      name: "Credentials",
-      credentials: {
-        username: { label: "Email", type: "text" },
-        password: { label: "Password", type: "password" },
-      },
-      authorize: async (credentials, req) => {
-        if (
-          credentials.username === "yc23@gmail.com" &&
-          credentials.password === "yc23password"
-        ) {
-          // Note the id is now a string, not a number
-          return Promise.resolve({
-            id: "1",
-            name: "YCombinator",
-            email: "yc23@gmail.com",
-          })
-        } else {
-          return Promise.reject(new Error("Invalid username or password"))
-        }
-      },
     }),
 
     EmailProvider({

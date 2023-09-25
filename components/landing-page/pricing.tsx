@@ -52,7 +52,7 @@ export default function PricingPage() {
                                 onClick={() => {
                                     va.track('Free Plan', { location: 'pricing' });
                                 }}
-                                href="/galogin"
+                                href="/login"
 
                             >
                                 Get Started

@@ -7,8 +7,8 @@ export default withAuth(
     const token = await getToken({ req })
     const isAuth = !!token
     const isAuthPage =
-      req.nextUrl.pathname.startsWith("/galogin") ||
-      req.nextUrl.pathname.startsWith("/garegister") ||
+      req.nextUrl.pathname.startsWith("/login") ||
+      req.nextUrl.pathname.startsWith("/register") ||
       req.nextUrl.pathname.startsWith("/yc-login")
 
     if (isAuthPage) {
@@ -26,7 +26,7 @@ export default withAuth(
       }
 
       return NextResponse.redirect(
-        new URL(`/galogin?from=${encodeURIComponent(from)}`, req.url)
+        new URL(`/login?from=${encodeURIComponent(from)}`, req.url)
       )
     }
 
@@ -45,5 +45,5 @@ export default withAuth(
 )
 
 export const config = {
-  matcher: ["/dashboard/:path*", "/galogin", "/garegister", "/yc-login"],
+  matcher: ["/dashboard/:path*", "/login", "/register", "/yc-login"],
 }

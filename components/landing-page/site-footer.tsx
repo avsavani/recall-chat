@@ -13,24 +13,13 @@ export function SiteFooter({ className }: React.HTMLAttributes<HTMLElement>) {
                     <p className="text-center text-sm leading-loose md:text-left">
 
                         <a
-                            href="/content/terms"
+                            href="https://www.recall.ai"
                             target="_blank"
                             rel="noreferrer"
                             className="font-medium underline underline-offset-4"
                         >
-                            Terms &amp; Conditions
+                            Powered By Recall.ai
                         </a>
-                        {" "} and {" "}
-                        <a
-                            href="/content/privacy"
-                            target="_blank"
-                            rel="noreferrer"
-                            className="font-medium underline underline-offset-4"
-                        >
-                            Privacy Policy
-                        </a>
-
-
                     </p>
                 </div>
 

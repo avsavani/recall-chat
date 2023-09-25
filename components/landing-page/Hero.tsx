@@ -12,26 +12,26 @@ function Hero() {
             <section className="hero-content z-10 space-y-6 pb-8 pt-6 md:pb-12 md:pt-10 lg:py-32">
                 <div className="container flex max-w-[64rem] flex-col items-center gap-4 text-center">
 
-                    <h1 className="font-heading text-5xl sm:text-5xl md:text-6xl lg:text-8xl ">
-                        Your Personal Knowledge Assistant.
+                    <h1 className="font-heading text-6xl sm:text-6xl md:text-7xl lg:text-8xl ">
+                        Recall Chat.
                     </h1>
                     <p className="max-w-[42rem] leading-normal text-muted-foreground sm:text-xl sm:leading-8 lg:text-3xl">
-                        ChatGPT for all your data sources.
+                        Chat with LLMs for all your meetings .
                     </p>
                     <div className="space-x-4">
                         <Link onClick={() => {
-                        }} href="mailto:gautam@typefrost.com?subject=Questions about Typefrost!" className={cn(buttonVariants({ size: "lg" }))}>
-                            Join the waitlist
+                        }} href="login" className={cn(buttonVariants({ size: "lg" }))}>
+                            Login
                         </Link>
 
-                        <Link href="mailto:gautam@typefrost.com?subject=Questions about Typefrost!" className={cn(buttonVariants({ variant: "outline", size: "lg" }))}>
-                            Contact Us
+                        <Link href="/register" className={cn(buttonVariants({ variant: "outline", size: "lg" }))}>
+                            Register
                         </Link>
 
                     </div>
                 </div>
             </section>
-            <section
+            {/* <section
                 id="features"
                 className="container space-y-6 bg-slate-50 py-8 dark:bg-transparent md:py-12 lg:py-24"
             >
@@ -119,15 +119,15 @@ function Hero() {
                     </div>
 
                 </div>
-            </section>
-            <section id="join-us" className="container py-8 md:py-12 lg:py-24">
+            </section> */}
+            {/* <section id="join-us" className="container py-8 md:py-12 lg:py-24">
                 <div className="mx-auto flex max-w-[58rem] flex-col items-center justify-center gap-4 text-center">
                     <h2 className="font-heading text-3xl leading-[1.1] sm:text-3xl md:text-6xl">
                         Be part of the Future.
                     </h2>
 
                 </div>
-            </section>
+            </section> */}
 
         </>
     )

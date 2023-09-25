@@ -12,16 +12,15 @@ import { userAuthSchema } from "@/lib/validations/auth"
 import { buttonVariants } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
-import { toast } from "@/hooks/use-toast";
+import { toast } from "@/hooks/use-toast"
 import { Icons } from "@/components/icons"
 import { FcGoogle } from "react-icons/fc"
-import mixpanel from "@/lib/initMixpanel"
 
-interface UserAuthFormProps extends React.HTMLAttributes<HTMLDivElement> {
-    formType: "login" | "register";
-}
+interface UserAuthFormProps extends React.HTMLAttributes<HTMLDivElement> { }
 
 type FormData = z.infer<typeof userAuthSchema>
+
+
 
 export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
     const {
@@ -35,44 +34,33 @@ export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
     const [isGitHubLoading, setIsGitHubLoading] = React.useState<boolean>(false)
     const searchParams = useSearchParams()
 
+    function getCallbackUrl() {
+        return searchParams?.get("from") || "/dashboard";
+    }
+
     async function onSubmit(data: FormData) {
         setIsLoading(true)
 
         const signInResult = await signIn("email", {
             email: data.email.toLowerCase(),
             redirect: false,
-            callbackUrl: searchParams?.get("from") || "/dashboard",
+            callbackUrl: getCallbackUrl(),
         })
 
         setIsLoading(false)
 
         if (!signInResult?.ok) {
-            mixpanel.track(`Failed User ${props.formType}`, {
-                distinct_id: data.email.toLowerCase(), // Identifying user by email
-                platform: 'Website',
-            });
-            toast({
+            return toast({
                 title: "Something went wrong.",
                 description: "Your sign in request failed. Please try again.",
                 variant: "destructive",
-            });
-            return;
+            })
         }
 
-        mixpanel.track(`User ${props.formType}`, {
-            distinct_id: data.email.toLowerCase(), // Identifying user by email
-            platform: 'Website',
-        });
-
-
-        if (props.formType === "register") {
-            mixpanel.alias(data.email.toLowerCase());
-        }
-
-        toast({
+        return toast({
             title: "Check your email",
             description: "We sent you a login link. Be sure to check your spam too.",
-        });
+        })
     }
 
     return (
@@ -122,12 +110,7 @@ export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
                 className={cn(buttonVariants({ variant: "outline" }))}
                 onClick={() => {
                     setIsGitHubLoading(true)
-                    signIn("google").then((signIp) => {
-                        mixpanel.track(`User ${props.formType}`, {
-                            distinct_id: 'Google', // Identifying user by email
-                            platform: 'Website',
-                        });
-                    })
+                    signIn("google", { callbackUrl: getCallbackUrl() })
                 }}
                 disabled={isLoading || isGitHubLoading}
             >
@@ -136,9 +119,8 @@ export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
                 ) : (
                     <FcGoogle className="mr-2 h-4 w-4" />
                 )}{" "}
-                Sign in with Google
+                Google
             </button>
-
         </div>
     )
 }
