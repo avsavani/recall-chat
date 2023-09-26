@@ -11,11 +11,11 @@ interface SiteConfig {
 }
 
 export const siteConfig: SiteConfig = {
-  name: "Typefrost",
-  description: "Unlocking your knowledge base",
+  name: "Recall Chat",
+  description: "Meeting BOT powered by LLMS",
   mainNav: [],
   links: {
-    twitter: "https://twitter.com/gautamtata",
-    github: "https://github.com/gautamtata",
+    twitter: "https://twitter.com/ashishsavani",
+    github: "https://github.com/avsavani",
   },
 }
