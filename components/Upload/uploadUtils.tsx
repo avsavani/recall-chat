@@ -256,7 +256,7 @@ export function handleUpload() {
         const { fileProgress, simulateFileProgress, updateFileProgress } = useFileProgress();
 
         const [showProgress, setShowProgress] = useState<boolean>(false)
-        const [maxFileSize] = React.useState<number>(20971520); // 20 MB
+        const [maxFileSize] = React.useState<number>(30971520); // 20 MB
         const [fileSize, setFileSize] = useState<number>(0)
         const [loadPercentage, setLoadPercentage] = useState<number>(0)
         const [uploadComplete, setUploadComplete] = useState(false);

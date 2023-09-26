@@ -89,7 +89,7 @@ export function RetrieveFile() {
                 {
                     event: "*",
                     schema: "public",
-                    table: "frosty_docs"
+                    table: "documents"
                 }, async (payload) => {
                     // Add type assertion here
                     const newRecord = payload.new as { [key: string]: any };

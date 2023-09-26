@@ -23,7 +23,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
       const response = await Promise.all(
         doc_names.map(async (doc_name) => {
           const { data, error } = await supabaseAdmin
-            .from("frosty_docs")
+            .from("documents")
             .delete()
             .eq("doc_name", doc_name)
             .eq("user_id", session.user.id)

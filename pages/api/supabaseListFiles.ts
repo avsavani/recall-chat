@@ -20,7 +20,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
         }
 
         const { data, error } = await supabaseAdmin
-            .from('frosty_docs')
+            .from('documents')
             .select('doc_name, user_id, origin, URL')
             .eq('user_id', session.user.id);
 
