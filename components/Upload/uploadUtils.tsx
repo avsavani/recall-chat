@@ -14,6 +14,7 @@ import { useHandleUpload } from './useHandleUpload';
 export function handleUpload() {
     const { uploadYoutube, uploadURL, uploadClipboard } = useHandleUpload();
     const { data: session } = useSession();
+
     const userId = session?.user?.id;
     function WebsiteLink({ handleCloseModal }: { handleCloseModal: () => void }) {
         const [inputURL, setInputURL] = useState<string>("");
@@ -278,7 +279,7 @@ export function handleUpload() {
                     formData.append("user_id", userId);
 
                     try {
-                        const response = await fetch("https://api.typefrost.com/embed-file", {
+                        const response = await fetch("/api/deepgram", {
                             method: "post",
                             body: formData,
                         });
@@ -316,12 +317,8 @@ export function handleUpload() {
         const { getRootProps, getInputProps, isDragReject, isDragAccept, acceptedFiles, fileRejections } = useDropzone({
             onDrop,
             accept: {
-                'text/csv': ['.csv'],
-                'text/docx': ['.docx'],
-                'application/pdf': ['.pdf'],
-                'text/markdown': ['.md'],
-                'application/vnd.openxmlformats-officedocument.presentationml.presentation': ['.ppt'],
-                'text/html': ['.html']
+                'audio/*': ['.mp3', '.wav', '.ogg'],
+                'video/*': ['.mp4', '.mov', '.avi', '.mkv']
             },
             maxSize: maxFileSize,
         });
