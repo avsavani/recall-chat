@@ -24,9 +24,9 @@ export default function Multiload({ handleCloseModal }: MultiloadProps) {
     const userId = session?.user?.id;
 
 
-    // const handleDataSourceSelect = useCallback((dataSource: string) => {
-    //     setSelectedDataSource(dataSource);
-    // }, []);
+    const handleDataSourceSelect = useCallback((dataSource: string) => {
+        setSelectedDataSource(dataSource);
+    }, []);
 
     return (
         <>
@@ -42,9 +42,9 @@ export default function Multiload({ handleCloseModal }: MultiloadProps) {
 
                 <div className='grid md:grid-cols-2 grid-flow-dense gap-2'>
 
-                    {/* <div className={'flex h-10 group bg-gray-300 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-600 rounded-md cursor-pointer items-center px-4 gap-2 shadow-md ' + (selectedDataSource === 'fileUpload' ? ' bg-blue-500 dark:bg-gray-600 ' : '')} onClick={() => handleDataSourceSelect('fileUpload')}>
+                    <div className={'flex h-10 w-full group bg-gray-300 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-600 rounded-md cursor-pointer items-center px-4 gap-2 shadow-md ' + (selectedDataSource === 'fileUpload' ? ' bg-blue-500 dark:bg-gray-600 ' : '')} onClick={() => handleDataSourceSelect('fileUpload')}>
                         <AiFillFileAdd size={22} className='group-hover:scale-90 text-gray-600 dark:text-gray-400' /><p>Upload Files</p>
-                    </div> */}
+                    </div>
 
                     {/* <div className={'flex h-10 group bg-gray-300 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-600 rounded-md cursor-pointer items-center px-4 gap-2 shadow-md ' + (selectedDataSource === 'webLink' ? ' bg-blue-500 dark:bg-gray-600  ' : '')} onClick={() => handleDataSourceSelect('webLink')}>
                         <CgWebsite size={22} className='group-hover:scale-90 text-gray-600 dark:text-gray-400' /><p>Website</p>
