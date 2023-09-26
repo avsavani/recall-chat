@@ -72,7 +72,6 @@ model VerificationToken {
 
 model documents {
   id               String                   @id @default(uuid())
-  workspaceId      String                   @db.Uuid
   name             String
   content          String
   metadata         Json

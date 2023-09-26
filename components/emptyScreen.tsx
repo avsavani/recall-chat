@@ -3,17 +3,14 @@ import { Button } from '@/components/shadui/button'
 import { IconArrowRight } from '@/components/ui/icons'
 
 const exampleMessages = [
+
     {
-        heading: 'Retrieve Document Details',
-        message: `What are the key points in the "Salesforce: project proposal" document?`
+        heading: 'Give me the summary of the meeting',
+        message: `Give me the summary of the meeting.`
     },
     {
-        heading: 'Ask Multiple Knowledge Sources',
-        message: `Based on the Salesforce Payslips and my Investment Portfolio documents, estimate tax liability for 2021.`
-    },
-    {
-        heading: 'Answers and Summaries from Documents',
-        message: `What Neural Network architecture was used in the paper "Attention is all you need"?`
+        heading: 'Specific questions about the meeting',
+        message: `What did Ashish say about Recall?`
     }
 ]
 
@@ -22,10 +19,10 @@ export function EmptyScreen({ setInputValue }) {
         <motion.div className="mx-auto max-w-2xl px-4" exit={{ opacity: 0, transition: { duration: 0.5 } }} >
             <div className="rounded-lg border bg-background p-8">
                 <h1 className="mb-2 text-lg font-semibold">
-                    Welcome to Typefrost, Your Personal Knowledge Assistant.
+                    Welcome to Recall Chat. ChatGPT for your meetings
                 </h1>
                 <p className="leading-normal text-muted-foreground">
-                    Get started interacting with your new AI assistant. Add your files or connecting to your favorite platforms using the 'Add New Data Source' option in the sidebar.
+                    Get started interacting with your new AI meeting. Add your files or connecting to your favorite platforms using the 'Add New Data Source' option in the sidebar.
                 </p>
                 <div className="mt-4 flex flex-col items-start space-y-2">
                     <p className="text-sm text-muted-foreground mb-2">

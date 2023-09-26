@@ -84,30 +84,16 @@ const Chat = ({ user_id, chatThreadId, currentChatThread, handleCreateThread, fe
     e.preventDefault();
     let currentQuestion = userQuestion.slice(0, 10000);
     setUserQuestion("");
-    let threadId = chatThreadId;
 
-    if (!currentChatThread || currentChatThread.length === 0) {
-      const newThread = await handleCreateThread(currentQuestion);
-      threadId = newThread.id;
-      mixpanel.track("New Thread Created", { user_id: user_id, threadId: threadId });
-      setCurrentChatThread(newThread);
-      router.push(`/dashboard?threadId=${threadId}`)
-    }
     const assistantAnswer = await generateAnswer();
 
     if (!assistantAnswer) {
       return;
     }
 
-    const lastPair = [
-      { role: "user", content: currentQuestion },
-      { role: "assistant", content: assistantAnswer },
-    ]
-    await insertChatHistory(user_id, threadId, lastPair);
 
     setIsFirstMessage(false);
     setCopyUserQuestion("")
-    mixpanel.track("User Sent Message", { user_id: user_id, threadId: threadId, message: currentQuestion });
   }
 
   const chatMessages = useMemo(() => {
