@@ -47,7 +47,7 @@ const PlusComponent = (userId) => {
                     handleOpenModal();
                 }}
             >
-                <FiUpload className="mr-2 h-4 w-4" /> Add New Data Source
+                <FiUpload className="mr-2 h-4 w-4" /> Upload Meeting
             </Button>
             {isOpen && (
                 <div style={{

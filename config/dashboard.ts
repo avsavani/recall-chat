@@ -20,10 +20,6 @@ export const dashboardConfig: DashboardConfig = {
       href: "/dashboard/files",
       icon: "Database",
     },
-    {
-      title: "Chat History",
-      icon: "History",
-    },
   ],
 }
 
