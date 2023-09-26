@@ -14,13 +14,13 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
                 return res.status(500).json({ error: err.message });
             }
 
-            const { input_language, userId } = fields;
+            const { userId } = fields;
             const file = files.file_upload;
 
             aws.config.update({ region: process.env.S3_UPLOAD_REGION, accessKeyId: process.env.S3_ACCESS_KEY, secretAccessKey: process.env.S3_ACCESS_SECRET });
             const s3 = new aws.S3();
             const params = {
-                Bucket: 'hypercharged',
+                Bucket: 'recall-meetings',
                 Key: `dubmaster/${userId}/${uniqueId}/${file.name}`,
                 Body: fs.createReadStream(file.path),
                 ACL: 'public-read',
@@ -28,7 +28,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
             try {
                 const uploaded = await s3.upload(params).promise();
-                const deepgramUrl = `https://api.deepgram.com/v1/listen?smart_format=true&diarize=true&language=${input_language}&model=base`;
+                const deepgramUrl = `https://api.deepgram.com/v1/listen?smart_format=true&diarize=true&language=en&model=nova`;
                 const deepgramResponse = await axios.post(deepgramUrl, {
                     url: uploaded.Location,
                 }, {
@@ -42,7 +42,22 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
                 }
                 
                 const restructuredTranscript = restructureTranscript(deepgramResponse.data);
-                return res.status(200).json(restructuredTranscript);
+                // send restructuredTranscript to the the endpoint "https://typefrost-backend-ysv2gphq4a-uw.a.run.app/clipboard"
+                // as a form data with userId 
+                const typefrostResponse = await axios.post('https://typefrost-backend-ysv2gphq4a-uw.a.run.app/clipboard', {
+                    user_id: userId,
+                    clipboard: restructuredTranscript,
+                }, {
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                });
+
+                if (typefrostResponse.status !== 200) {
+                    throw new Error('Typefrost API call failed');
+                }
+
+                res.status(200).json({ transcript: restructuredTranscript });
 
             } catch (error) {
                 console.error(error);
