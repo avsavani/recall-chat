@@ -21,7 +21,6 @@ export const OpenAIStream = async (
   question: string,
   apiKey: string,
   context: string,
-  conversationHistory: { role: string; content: string }[],
   previousContext: string
 ) => {
   const encoder = new TextEncoder()
@@ -83,7 +82,6 @@ export const OpenAIStream = async (
           role: "assistant",
           content: `Current Context: ${context}`,
         },
-        ...conversationHistory,
         {
           role: "assistant",
           content: `Previous Context: ${previousContext}`,

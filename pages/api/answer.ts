@@ -10,11 +10,10 @@ const apiKey = process.env.OPENAI_API_KEY
 
 const handler = async (req: Request): Promise<Response> => {
   try {
-    const { question, context, conversationHistory, previousContext } =
+    const { question, context, previousContext } =
       (await req.json()) as {
         question: string
         context: string
-        conversationHistory: History
         previousContext: string
       }
 
@@ -22,7 +21,6 @@ const handler = async (req: Request): Promise<Response> => {
       question,
       apiKey,
       context,
-      conversationHistory,
       previousContext
     )
 

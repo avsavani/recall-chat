@@ -52,7 +52,7 @@ export function useSupabaseQuery(user_id, chatThreadId, setLoadingStatus) {
 
 
     // Get last 5 messages from Supabase
-    const previousFiveMessages = await getLastFiveChats(user_id, chatThreadId)
+   // const previousFiveMessages = await getLastFiveChats(user_id, chatThreadId)
 
 
     // doc_names: ['bodyspec-results.pdf'],
@@ -95,14 +95,13 @@ export function useSupabaseQuery(user_id, chatThreadId, setLoadingStatus) {
         body: JSON.stringify({
           question: question,
           context: context,
-          conversationHistory: previousFiveMessages,
           previousContext: previousContext,
         }),
         signal: abortController.signal,
       });
 
-      mixpanel.track("Assistant Sent Response", { user_id: user_id, threadId: chatThreadId });
       const data = answerResponse.body;
+      console.log("This is the data from Supabase: ", data)
 
       if (!data) {
         return;

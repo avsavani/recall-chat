@@ -14,16 +14,7 @@ const handler = async (req: Request): Promise<Response> => {
     }
 
     const inputRaw = query.replace(/\n/g, " ")
-    const inputProcessed = query
-      .toLowerCase()
-      .replace(/[^a-z\d\s]+/g, "")
-      .replace(/\n/g, " ")
 
-    // Remove stopwords
-    const stopWords = new Set(["a", "an", "the"])
-    const tokens = inputProcessed.split(" ")
-    const processedTokens = tokens.filter((token) => !stopWords.has(token))
-    const processedText = processedTokens.join(" ")
 
     const res = await fetch("https://api.openai.com/v1/embeddings", {
       headers: {
@@ -40,13 +31,11 @@ const handler = async (req: Request): Promise<Response> => {
     const embedding = json.data[0].embedding
 
     const { data: chunks, error } = await supabaseAdmin.rpc(
-      "combined_frosty_search",
+      "match_documents",
       {
         query_embedding: embedding,
-        text_query: processedText,
         match_count: matches,
         p_user_id: user_id,
-        similarity_threshold: 0.65,
       }
     )
 
